@@ -1,5 +1,7 @@
 package ru.hogwarts.school.model;
 
+import java.util.Objects;
+
 public class Faculty {
     private long id;
     private String name;
@@ -9,6 +11,27 @@ public class Faculty {
         this.id = id;
         this.name = name;
         this.color = color;
+    }
+
+    @Override
+    public String toString() {
+        return "Faculty{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", color='" + color + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Faculty faculty)) return false;
+        return getId() == faculty.getId() && Objects.equals(getName(), faculty.getName()) && Objects.equals(getColor(), faculty.getColor());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getColor());
     }
 
     public long getId() {
@@ -34,4 +57,6 @@ public class Faculty {
     public void setColor(String color) {
         this.color = color;
     }
+
+
 }
