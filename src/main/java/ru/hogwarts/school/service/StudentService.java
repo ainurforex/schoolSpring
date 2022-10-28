@@ -6,6 +6,7 @@ import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -26,6 +27,9 @@ public class StudentService {
     }
 
     public Student editStudent(Student student) {
+        if (studentRepository.findById(student.getId()).equals(Optional.empty())) {
+            return null;
+        }
         return studentRepository.save(student);
     }
 
