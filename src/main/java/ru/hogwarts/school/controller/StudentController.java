@@ -16,9 +16,9 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping(path = " {id}")
-    public ResponseEntity<Student> getStudentInfo(@PathVariable Long id) {
-        Student student = studentService.findStudent(id);
+    @GetMapping(path = " {studentId}")
+    public ResponseEntity<Student> getStudentInfo(@PathVariable Long studentId) {
+        Student student = studentService.findStudent(studentId);
         if (student == null) {
             return ResponseEntity.notFound().build();
         }
@@ -26,13 +26,26 @@ public class StudentController {
     }
 
     @GetMapping
-    public ResponseEntity<Collection<Student>> getAllStudents() {
+    public ResponseEntity<Collection<Student>> getStudents(@RequestParam(required = false) Long facultyId) {
+        if (facultyId != null) {
+            return ResponseEntity.ok(studentService.getStudentsByFacultyId(facultyId));
+        }
         return ResponseEntity.ok(studentService.getAllStudent());
     }
+
+
+
 
     @GetMapping(path = "byAge/{age}")
     public ResponseEntity<Collection<Student>> getStudentsByAge(@PathVariable int age) {
         return ResponseEntity.ok(studentService.getStudentsByAge(age));
+    }
+
+    @GetMapping(path = "ByAgeBetween")
+    public ResponseEntity<Collection<Student>> getStudentsByAgeBetween(
+            @RequestParam("min") int min,
+            @RequestParam("max") int max) {
+        return ResponseEntity.ok(studentService.getByAgeBetween(min, max));
     }
 
     @PostMapping
@@ -49,9 +62,13 @@ public class StudentController {
         return ResponseEntity.ok(foundStudent);
     }
 
-    @DeleteMapping(path = "{id}")
-    public ResponseEntity<Student> deleteStudent(@PathVariable Long id) {
-        studentService.deleteStudent(id);
+    @DeleteMapping(path = "{studentId}")
+    public ResponseEntity<Student> deleteStudent(@PathVariable Long studentId) {
+        Student student = studentService.findStudent(studentId);
+        if (student == null) {
+            return ResponseEntity.notFound().build();
+        }
+        studentService.deleteStudent(studentId);
         return ResponseEntity.ok().build();
     }
 

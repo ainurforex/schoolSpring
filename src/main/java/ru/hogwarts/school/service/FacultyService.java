@@ -6,9 +6,8 @@ import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.repository.FacultyRepository;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 @Service
 public class FacultyService {
@@ -42,10 +41,13 @@ public class FacultyService {
     }
 
     public Collection<Faculty> getFacultyByColor(String color) {
-        return Collections.unmodifiableCollection(facultyRepository.findAll().stream()
-                .filter(s -> s.getColor().equals(color))
-                .collect(Collectors.toList()));
-
+        return facultyRepository.findFacultyByColorIgnoreCase(color);
     }
+
+    public Collection<Faculty> getFacultyByName(String name) {
+        return facultyRepository.findFacultyByNameIgnoreCase(name);
+    }
+
+
 }
 
