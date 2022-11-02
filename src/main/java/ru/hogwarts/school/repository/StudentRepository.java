@@ -12,7 +12,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     Student findById(long id);
 
-
     Collection<Student> findByFaculty_Id(long id);
+
 
 }

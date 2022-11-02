@@ -33,8 +33,8 @@ public class StudentService {
 
     public void deleteStudent(long id) {
         studentRepository.deleteById(id);
-
     }
+
 
     public Collection<Student> getAllStudent() {
         return studentRepository.findAll();

@@ -53,7 +53,7 @@ public class Faculty {
         return students.size();
     }
 
-    public Collection<Student> viewStudents() {
+    public Collection<Student> getStudents() {
         return students;
     }
 
