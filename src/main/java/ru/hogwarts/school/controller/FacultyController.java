@@ -1,5 +1,6 @@
 package ru.hogwarts.school.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
@@ -22,7 +23,7 @@ public class FacultyController {
     public ResponseEntity<Faculty> getFacultyInfo(@PathVariable Long id) {
         Faculty faculty = facultyService.findFaculty(id);
         if (faculty == null) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.ok(faculty);
     }
@@ -31,8 +32,9 @@ public class FacultyController {
     @GetMapping
     public ResponseEntity<Collection<Faculty>> getFacultys(@RequestParam(required = false) String name,
                                                            @RequestParam(required = false) String color) {
+
         if (name != null && color != null) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
         if (name != null && !name.isBlank()) {
             return ResponseEntity.ok(facultyService.getFacultyByName(name));
@@ -50,18 +52,22 @@ public class FacultyController {
     }
 
     @PutMapping
-    public ResponseEntity<Faculty> editStudent(@RequestBody Faculty faculty) {
+    public ResponseEntity<Faculty> editFaculty(@RequestBody Faculty faculty) {
         Faculty foundFaculty = facultyService.editFaculty(faculty);
         if (foundFaculty == null) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
         return ResponseEntity.ok(foundFaculty);
     }
 
     @DeleteMapping(path = "{id}")
     public ResponseEntity<Faculty> deleteFaculty(@PathVariable Long id) {
+        Faculty faculty = facultyService.findFaculty(id);
+        if (faculty == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
         facultyService.deleteFaculty(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(faculty);
     }
 
 }

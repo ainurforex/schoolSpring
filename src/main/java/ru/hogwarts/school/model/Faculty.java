@@ -49,9 +49,6 @@ public class Faculty {
         return color;
     }
 
-    public int getCountOfStudents() {
-        return students.size();
-    }
 
     public Collection<Student> getStudents() {
         return students;
@@ -68,6 +65,5 @@ public class Faculty {
     public void setColor(String color) {
         this.color = color;
     }
-
 
 }

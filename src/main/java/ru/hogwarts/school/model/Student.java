@@ -49,7 +49,7 @@ public class Student {
         return age;
     }
 
-    public long getFacultyId() {
+    public long takeFacultyId() {
         return faculty.getId();
     }
 
