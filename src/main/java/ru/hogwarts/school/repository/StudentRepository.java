@@ -14,5 +14,4 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     Collection<Student> findByFaculty_Id(long id);
 
 
-
 }
