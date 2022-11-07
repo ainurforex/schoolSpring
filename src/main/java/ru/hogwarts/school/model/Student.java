@@ -14,7 +14,9 @@ public class Student {
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
-
+    @OneToOne
+    @JoinColumn(name = "avatar_id")
+    private Avatar avatar;
     @Override
     public String toString() {
         return "Student{" +
@@ -64,6 +66,7 @@ public class Student {
     public void setAge(int age) {
         this.age = age;
     }
+
 
 
 }

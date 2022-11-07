@@ -49,7 +49,6 @@ public class Faculty {
         return color;
     }
 
-
     public Collection<Student> getStudents() {
         return students;
     }
