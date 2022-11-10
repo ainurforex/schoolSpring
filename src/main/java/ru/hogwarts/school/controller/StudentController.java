@@ -19,7 +19,7 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping(path = " {studentId}")
+    @GetMapping(path = "{studentId}")
     public ResponseEntity<Student> getStudentInfo(@PathVariable Long studentId) {
         Student student = studentService.findStudent(studentId);
         if (student == null) {

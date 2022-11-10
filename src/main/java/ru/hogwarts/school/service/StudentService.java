@@ -57,5 +57,4 @@ public class StudentService {
         return studentRepository.findByFaculty_Id(id);
     }
 
-
 }
