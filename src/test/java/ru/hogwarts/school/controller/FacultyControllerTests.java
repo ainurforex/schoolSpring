@@ -12,12 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.hogwarts.school.model.Faculty;
-import ru.hogwarts.school.repository.AvatarRepository;
 import ru.hogwarts.school.repository.FacultyRepository;
-import ru.hogwarts.school.repository.StudentRepository;
-import ru.hogwarts.school.service.AvatarService;
 import ru.hogwarts.school.service.FacultyService;
-import ru.hogwarts.school.service.StudentService;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +24,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest
+@WebMvcTest(FacultyController.class)
 public class FacultyControllerTests {
 
     @Autowired
@@ -37,20 +33,8 @@ public class FacultyControllerTests {
     @MockBean
     private FacultyRepository facultyRepository;
 
-    @MockBean
-    private StudentRepository studentRepository;
-
-    @MockBean
-    private AvatarRepository avatarRepository;
-
     @SpyBean
     private FacultyService facultyService;
-
-    @SpyBean
-    private StudentService studentService;
-
-    @SpyBean
-    private AvatarService avatarService;
 
 
     @InjectMocks
