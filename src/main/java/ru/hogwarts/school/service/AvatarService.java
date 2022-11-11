@@ -49,9 +49,6 @@ public class AvatarService {
         }
 
         Avatar avatar = findAvatar(studentId);
-        if (avatar == null) {
-            avatar = new Avatar();
-        }
         avatar.setStudent(student);
         avatar.setFilePath(filePath.toString());
         avatar.setFileSize(avatarFile.getSize());
@@ -62,7 +59,7 @@ public class AvatarService {
 
 
     public Avatar findAvatar(Long studentId) {
-        return avatarRepository.findByStudentId(studentId);
+        return avatarRepository.findByStudentId(studentId).orElseGet(Avatar::new);
     }
 
     private String getExtensions(String fileName) {
