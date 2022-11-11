@@ -3,9 +3,7 @@ package ru.hogwarts.school.controller;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
-
 import org.mockito.InjectMocks;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -20,11 +18,9 @@ import ru.hogwarts.school.repository.StudentRepository;
 import ru.hogwarts.school.service.AvatarService;
 import ru.hogwarts.school.service.FacultyService;
 import ru.hogwarts.school.service.StudentService;
-
 import java.util.ArrayList;
-
 import java.util.List;
-import java.util.Optional;
+
 
 
 import static org.mockito.ArgumentMatchers.any;
