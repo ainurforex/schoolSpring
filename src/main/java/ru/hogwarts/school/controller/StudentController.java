@@ -54,13 +54,27 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getStudentsByAge(age));
     }
 
-    @GetMapping(path = "ByAgeBetween")
+    @GetMapping(path = "byAgeBetween")
     public ResponseEntity<Collection<Student>> getStudentsByAgeBetween(
             @RequestParam("min") int min,
             @RequestParam("max") int max) {
         return ResponseEntity.ok(studentService.getByAgeBetween(min, max));
     }
 
+    @GetMapping(path = "numberOfStudents")
+    public ResponseEntity<Integer> getNumberOfStudents() {
+        return ResponseEntity.ok(studentService.getNumberOfStudents());
+    }
+
+    @GetMapping(path = "avarageAgeOfStudents")
+    public ResponseEntity<Integer> getAvarageAgeOfStudents() {
+        return ResponseEntity.ok(studentService.avarageAgeOfStudents());
+    }
+
+    @GetMapping(path = "lastFiveStudentsById")
+    public ResponseEntity<Collection<Student>> getLastFiveStudentsById() {
+        return ResponseEntity.ok(studentService.getLastFiveStudentsById());
+    }
 
     @PutMapping
     public ResponseEntity<Student> editStudent(@RequestBody Student student) {
