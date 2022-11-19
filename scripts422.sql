@@ -1,6 +1,6 @@
 CREATE TABLE car
 (
-    car_ID INTEGER     NOT NULL,
+    car_ID INTEGER IDENTITY(1,1),
     mark   varchar(30) NOT NULL,
     model  varchar(30) NOT NULL,
     cost   INTEGER,
@@ -9,7 +9,7 @@ CREATE TABLE car
 
 CREATE TABLE human
 (
-    human_ID       INTEGER     NOT NULL,
+    human_ID       INTEGER INTEGER IDENTITY (1,1),
     name           varchar(30) NOT NULL,
     age            INTEGER,
     car_ID         INTEGER,
@@ -18,5 +18,9 @@ CREATE TABLE human
     CONSTRAINT human_primary_key PRIMARY KEY (human_ID)
 )
 
-SELECT student.name, student.age, faculty.name FROM student JOIN faculty ON student.faculty_id = faculty.id
-SELECT student.name FROM student JOIN avatar ON avatar.student_id = student.id
+SELECT student.name, student.age, faculty.name
+FROM student
+         JOIN faculty ON student.faculty_id = faculty.id
+SELECT student.name
+FROM student
+         JOIN avatar ON avatar.student_id = student.id

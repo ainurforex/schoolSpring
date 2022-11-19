@@ -28,6 +28,12 @@ public class StudentController {
         return ResponseEntity.ok(student);
     }
 
+    @GetMapping(path = "/name/{name}")
+    public ResponseEntity<Collection<Student>> getStudentByName(@PathVariable String name) {
+        Collection<Student> students = studentService.getStudentByName(name);
+        return ResponseEntity.ok(students);
+    }
+
     @GetMapping(path = "facultyId/{studentId}")
     public ResponseEntity<Long> getFacultyIdByStudentId(@PathVariable Long studentId) {
         Long facultyId = null;

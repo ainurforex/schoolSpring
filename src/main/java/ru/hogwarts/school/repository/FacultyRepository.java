@@ -1,6 +1,8 @@
 package ru.hogwarts.school.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 import ru.hogwarts.school.model.Faculty;
 
 
@@ -14,5 +16,7 @@ public interface FacultyRepository extends JpaRepository<Faculty, Long> {
 
     Faculty findById(long id);
 
-
+    @Transactional
+    @Query(value = "SELECT * from faculty WHERE name LIKE :findName and color LIKE :findColor", nativeQuery = true)
+    Collection<Faculty> getFacultyByNameAndColor(String findName, String findColor);
 }

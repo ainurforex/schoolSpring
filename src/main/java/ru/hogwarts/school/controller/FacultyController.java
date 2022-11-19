@@ -45,6 +45,12 @@ public class FacultyController {
         return ResponseEntity.ok(facultyService.getAllFacultys());
     }
 
+    @GetMapping(path = "/findByNameAndColor/")
+    public ResponseEntity<Collection<Faculty>> getFacultysByNameAndColor(@RequestParam(required = true) String name,
+                                                                         @RequestParam(required = true) String color) {
+
+        return ResponseEntity.ok(facultyService.getFacultyByNameAndColor(name, color));
+    }
 
     @PostMapping
     public Faculty creatFaculty(@RequestBody Faculty faculty) {

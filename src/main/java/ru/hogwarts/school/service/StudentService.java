@@ -23,6 +23,10 @@ public class StudentService {
         return studentRepository.findById(id);
     }
 
+    public Collection<Student> getStudentByName(String name) {
+        return studentRepository.getStudentByName(name);
+    }
+
     public Student editStudent(Student student) {
 
         if (studentRepository.findById(student.getId()) == null) {
