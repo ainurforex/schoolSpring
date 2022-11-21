@@ -85,7 +85,6 @@ public class StudentController {
     @PutMapping
     public ResponseEntity<Student> editStudent(@RequestBody Student student) {
         Student foundStudent = studentService.editStudent(student);
-        System.out.println(foundStudent);
         if (foundStudent == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
