@@ -7,7 +7,9 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.Collection;
-
+import java.util.OptionalDouble;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @Service
@@ -15,7 +17,8 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
 
-    Logger logger= LoggerFactory.getLogger(StudentService.class);
+    Logger logger = LoggerFactory.getLogger(StudentService.class);
+
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
@@ -41,7 +44,7 @@ public class StudentService {
             logger.error("There is no such student");
             return null;
         }
-        logger.debug("Student id {} is edited",student.getId());
+        logger.debug("Student id {} is edited", student.getId());
         return studentRepository.save(student);
     }
 
@@ -82,13 +85,26 @@ public class StudentService {
         return studentRepository.getNumberOfStudents();
     }
 
-    public int avarageAgeOfStudents() {
+    public OptionalDouble avarageAgeOfStudents() {
         logger.info("Was invoked method for avarageAgeOfStudents");
-        return studentRepository.avarageAgeOfStudents();
+        Stream<Student> streamAllStudent = studentRepository.findAll().stream();
+        return streamAllStudent
+                .parallel()
+                .mapToInt(e -> e.getAge()).average();
     }
 
     public Collection<Student> getLastFiveStudentsById() {
         logger.info("Was invoked method for getLastFiveStudentsById");
         return studentRepository.getLastFiveStudentsById();
+    }
+
+    public Collection<Student> getStudentsBeginASorted() {
+        logger.info("Was invoked method for getStudentsBeginASorted");
+        Stream<Student> streamAllStudent = studentRepository.findAll().stream();
+        return streamAllStudent
+                .parallel()
+                .filter(e -> e.getName().charAt(0) == 'A')
+                .sorted((n1, n2) -> n1.getName().compareTo(n2.getName()))
+                .collect(Collectors.toList());
     }
 }

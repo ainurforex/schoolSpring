@@ -7,6 +7,7 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
 import java.util.Collection;
+import java.util.OptionalDouble;
 
 @RestController
 @RequestMapping(path = "students")
@@ -27,6 +28,7 @@ public class StudentController {
         }
         return ResponseEntity.ok(student);
     }
+
 
     @GetMapping(path = "/name/{name}")
     public ResponseEntity<Collection<Student>> getStudentByName(@PathVariable String name) {
@@ -73,7 +75,7 @@ public class StudentController {
     }
 
     @GetMapping(path = "avarageAgeOfStudents")
-    public ResponseEntity<Integer> getAvarageAgeOfStudents() {
+    public ResponseEntity<OptionalDouble> getAvarageAgeOfStudents() {
         return ResponseEntity.ok(studentService.avarageAgeOfStudents());
     }
 
@@ -106,5 +108,8 @@ public class StudentController {
         return ResponseEntity.ok(student);
     }
 
-
+    @GetMapping(path = "/studentsBeginASorted")
+    public ResponseEntity<Collection<Student>> getStudentsBeginASorted() {
+        return ResponseEntity.ok(studentService.getStudentsBeginASorted());
+    }
 }
