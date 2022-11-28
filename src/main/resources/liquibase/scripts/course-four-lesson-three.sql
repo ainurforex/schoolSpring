@@ -6,6 +6,7 @@ CREATE TABLE students(
     name TEXT
 )
 
+
 -- changeset ainurforex:2
 CREATE TABLE facultys(
                          id SERIAL,

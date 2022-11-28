@@ -20,6 +20,16 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+
+    @GetMapping(path = "/studentsBeginASorted")
+    public ResponseEntity<Collection<Student>> getStudentsBeginASorted() {
+        return ResponseEntity.ok(studentService.getStudentsBeginASorted());
+    }
+
+    @GetMapping(path = "avarageAgeOfStudents")
+    public ResponseEntity<OptionalDouble> getAvarageAgeOfStudents() {
+        return ResponseEntity.ok(studentService.avarageAgeOfStudents());
+    }
     @GetMapping(path = "{studentId}")
     public ResponseEntity<Student> getStudentInfo(@PathVariable Long studentId) {
         Student student = studentService.findStudent(studentId);
@@ -74,10 +84,7 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getNumberOfStudents());
     }
 
-    @GetMapping(path = "avarageAgeOfStudents")
-    public ResponseEntity<OptionalDouble> getAvarageAgeOfStudents() {
-        return ResponseEntity.ok(studentService.avarageAgeOfStudents());
-    }
+
 
     @GetMapping(path = "lastFiveStudentsById")
     public ResponseEntity<Collection<Student>> getLastFiveStudentsById() {
@@ -108,8 +115,6 @@ public class StudentController {
         return ResponseEntity.ok(student);
     }
 
-    @GetMapping(path = "/studentsBeginASorted")
-    public ResponseEntity<Collection<Student>> getStudentsBeginASorted() {
-        return ResponseEntity.ok(studentService.getStudentsBeginASorted());
-    }
+
+
 }

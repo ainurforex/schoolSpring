@@ -19,6 +19,15 @@ public class FacultyController {
         this.facultyService = facultyService;
     }
 
+    @GetMapping(path = "/longestNameFaculty/")
+    public ResponseEntity<String> getLongestNameFaculty() {
+        String longestName = facultyService.getLongestNameFaculty();
+        if (longestName == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(facultyService.getLongestNameFaculty());
+    }
+
     @GetMapping(path = "{id}")
     public ResponseEntity<Faculty> getFacultyInfo(@PathVariable Long id) {
         Faculty faculty = facultyService.findFaculty(id);
@@ -52,14 +61,7 @@ public class FacultyController {
         return ResponseEntity.ok(facultyService.getFacultyByNameAndColor(name, color));
     }
 
-    @GetMapping(path = "/longestNameFaculty/")
-    public ResponseEntity<String> getLongestNameFaculty() {
-        String longestName=facultyService.getLongestNameFaculty();
-        if (longestName==null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return ResponseEntity.ok(facultyService.getLongestNameFaculty());
-    }
+
     @PostMapping
     public Faculty creatFaculty(@RequestBody Faculty faculty) {
         return facultyService.creatFaculty(faculty);
@@ -83,5 +85,6 @@ public class FacultyController {
         facultyService.deleteFaculty(id);
         return ResponseEntity.ok(faculty);
     }
+
 
 }

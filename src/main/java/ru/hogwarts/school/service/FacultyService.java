@@ -19,6 +19,17 @@ public class FacultyService {
         this.facultyRepository = facultyRepository;
     }
 
+    public String getLongestNameFaculty() {
+        logger.info("Was invoked method for getLongestNameFaculty");
+        Stream<String> streamAllNameFacultys = facultyRepository.getFacultysName().stream();
+        if (streamAllNameFacultys == null) {
+            return null;
+        }
+        return streamAllNameFacultys
+                .sorted((n1, n2) -> n2.length() - n1.length())
+                .toList().get(0);
+    }
+
     public Faculty creatFaculty(Faculty faculty) {
         logger.info("Was invoked method for creatFaculty");
         return facultyRepository.save(faculty);
@@ -65,15 +76,6 @@ public class FacultyService {
     }
 
 
-    public String getLongestNameFaculty() {
-        logger.info("Was invoked method for getLongestNameFaculty");
-        Stream<String> streamAllNameFacultys = facultyRepository.getFacultysName().stream();
-        if (streamAllNameFacultys == null) {
-            return null;
-        }
-        return streamAllNameFacultys
-                .sorted((n1, n2) -> n2.length() - n1.length())
-                .toList().get(0);
-    }
+
 }
 

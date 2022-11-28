@@ -23,6 +23,24 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
+    public Collection<Student> getStudentsBeginASorted() {
+        logger.info("Was invoked method for getStudentsBeginASorted");
+        Stream<Student> streamAllStudent = studentRepository.findAll().stream();
+        return streamAllStudent
+                .parallel()
+                .filter(e -> e.getName().charAt(0) == 'A')
+                .sorted((n1, n2) -> n1.getName().compareTo(n2.getName()))
+                .collect(Collectors.toList());
+    }
+
+    public OptionalDouble avarageAgeOfStudents() {
+        logger.info("Was invoked method for avarageAgeOfStudents");
+        Stream<Student> streamAllStudent = studentRepository.findAll().stream();
+        return streamAllStudent
+                .parallel()
+                .mapToInt(e -> e.getAge()).average();
+    }
+
     public Student creatStudent(Student student) {
         logger.info("Was invoked method for creatStudent");
         return studentRepository.save(student);
@@ -85,26 +103,11 @@ public class StudentService {
         return studentRepository.getNumberOfStudents();
     }
 
-    public OptionalDouble avarageAgeOfStudents() {
-        logger.info("Was invoked method for avarageAgeOfStudents");
-        Stream<Student> streamAllStudent = studentRepository.findAll().stream();
-        return streamAllStudent
-                .parallel()
-                .mapToInt(e -> e.getAge()).average();
-    }
 
     public Collection<Student> getLastFiveStudentsById() {
         logger.info("Was invoked method for getLastFiveStudentsById");
         return studentRepository.getLastFiveStudentsById();
     }
 
-    public Collection<Student> getStudentsBeginASorted() {
-        logger.info("Was invoked method for getStudentsBeginASorted");
-        Stream<Student> streamAllStudent = studentRepository.findAll().stream();
-        return streamAllStudent
-                .parallel()
-                .filter(e -> e.getName().charAt(0) == 'A')
-                .sorted((n1, n2) -> n1.getName().compareTo(n2.getName()))
-                .collect(Collectors.toList());
-    }
+
 }

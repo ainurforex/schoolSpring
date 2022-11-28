@@ -28,7 +28,7 @@ public class AvatarService {
 
     private final StudentService studentService;
     private final AvatarRepository avatarRepository;
-    Logger logger= LoggerFactory.getLogger(AvatarService.class);
+    Logger logger = LoggerFactory.getLogger(AvatarService.class);
 
     public AvatarService(StudentService studentService, AvatarRepository avatarRepository) {
         this.studentService = studentService;
@@ -49,9 +49,9 @@ public class AvatarService {
                 BufferedInputStream bis = new BufferedInputStream(is, 1024);
                 BufferedOutputStream bos = new BufferedOutputStream(os, 1024);
         ) {
+
             bis.transferTo(bos);
         }
-
         Avatar avatar = findAvatar(studentId);
         avatar.setStudent(student);
         avatar.setFilePath(filePath.toString());
@@ -74,7 +74,7 @@ public class AvatarService {
 
     public Collection<Avatar> getAvatarsListByPage(Integer pageNumber, Integer pageSize) {
         logger.info("Was invoked method for getAvatarsListByPage");
-        PageRequest pageRequest=PageRequest.of(pageNumber-1,pageSize);
+        PageRequest pageRequest = PageRequest.of(pageNumber - 1, pageSize);
         return avatarRepository.findAll(pageRequest).getContent();
     }
 }

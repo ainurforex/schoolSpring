@@ -17,14 +17,16 @@ public class InfoController {
         this.infoService = infoService;
     }
 
+    @GetMapping(path = "/getNumber")
+    public ResponseEntity<Integer> getNumber() {
+        return ResponseEntity.ok(infoService.getNumber());
+    }
 
     @GetMapping(path = "/getPort")
     public ResponseEntity<Integer> getPort() {
         return ResponseEntity.ok(infoService.getPort());
     }
 
-    @GetMapping(path = "/getNumber")
-    public ResponseEntity<Integer> getNumber() {
-        return ResponseEntity.ok(infoService.getNumber());
-    }
+
+
 }

@@ -13,11 +13,6 @@ public class InfoService {
     @Value("${server.port}")
     private Integer serverPort;
 
-    public Integer getPort() {
-        logger.info("Was invoked method for getPort");
-        return serverPort;
-    }
-
     public Integer getNumber() {
         logger.info("Was invoked method for getNumber");
         int sum = Stream
@@ -26,6 +21,12 @@ public class InfoService {
                 .parallel().reduce(1, (a, b) -> a + b);
         return sum;
     }
+    public Integer getPort() {
+        logger.info("Was invoked method for getPort");
+        return serverPort;
+    }
+
+
 
 
 }
