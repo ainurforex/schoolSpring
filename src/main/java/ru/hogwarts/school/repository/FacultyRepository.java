@@ -25,5 +25,4 @@ public interface FacultyRepository extends JpaRepository<Faculty, Long> {
     @Query(value = "SELECT * from faculty WHERE name LIKE :findName and color LIKE :findColor", nativeQuery = true)
     Collection<Faculty> getFacultyByNameAndColor(String findName, String findColor);
 
-
 }
