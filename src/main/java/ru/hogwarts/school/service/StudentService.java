@@ -7,6 +7,7 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -16,7 +17,8 @@ import java.util.stream.Stream;
 public class StudentService {
 
     private final StudentRepository studentRepository;
-
+    public static int count = 0;
+    Object flag = new Object();
     Logger logger = LoggerFactory.getLogger(StudentService.class);
 
     public StudentService(StudentRepository studentRepository) {
@@ -109,4 +111,62 @@ public class StudentService {
         return studentRepository.getLastFiveStudentsById();
     }
 
+    public void threadTest() {
+
+        count = 1;
+        printStudentNameByIndex(0);
+        printStudentNameByIndex(1);
+        new Thread(() -> {
+            printStudentNameByIndex(2);
+            printStudentNameByIndex(3);
+        }).start();
+
+        new Thread(() -> {
+            printStudentNameByIndex(4);
+            printStudentNameByIndex(5);
+        }).start();
+
+    }
+
+    public void threadSynchroTest() {
+        count = 1;
+        printStudentNameByIndexSynchro(0);
+        printStudentNameByIndexSynchro(1);
+        new Thread(() -> {
+            printStudentNameByIndexSynchro(2);
+            printStudentNameByIndexSynchro(3);
+        }).start();
+
+        new Thread(() -> {
+            printStudentNameByIndexSynchro(4);
+            printStudentNameByIndexSynchro(5);
+        }).start();
+
+    }
+
+    private void printStudentNameByIndex(int index) {
+        List<Student> students = studentRepository.findAll();
+        String name = students.get(index).getName();
+
+        System.out.println("Index " + (index + 1) + " "
+                + "Student " + name
+                + " Count " + count);
+        count++;
+
+    }
+
+    private synchronized void printStudentNameByIndexSynchro(int index) {
+        {
+
+            List<Student> students = studentRepository.findAll();
+            String name = students.get(index).getName();
+            synchronized (flag) {
+                System.out.println("Index " + (index + 1) + " "
+                        + "Student " + name
+                        + " Count " + count);
+                count++;
+            }
+
+        }
+    }
 }

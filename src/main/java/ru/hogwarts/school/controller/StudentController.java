@@ -21,6 +21,16 @@ public class StudentController {
     }
 
 
+    @GetMapping(path = "/theadTest")
+    public void theadTest() {
+        studentService.threadTest();
+    }
+
+    @GetMapping(path = "/threadSynchroTest")
+    public void threadSynchroTest() {
+        studentService.threadSynchroTest();
+    }
+
     @GetMapping(path = "/studentsBeginASorted")
     public ResponseEntity<Collection<Student>> getStudentsBeginASorted() {
         return ResponseEntity.ok(studentService.getStudentsBeginASorted());
@@ -30,6 +40,7 @@ public class StudentController {
     public ResponseEntity<OptionalDouble> getAvarageAgeOfStudents() {
         return ResponseEntity.ok(studentService.avarageAgeOfStudents());
     }
+
     @GetMapping(path = "{studentId}")
     public ResponseEntity<Student> getStudentInfo(@PathVariable Long studentId) {
         Student student = studentService.findStudent(studentId);
@@ -83,7 +94,6 @@ public class StudentController {
     public ResponseEntity<Integer> getNumberOfStudents() {
         return ResponseEntity.ok(studentService.getNumberOfStudents());
     }
-
 
 
     @GetMapping(path = "lastFiveStudentsById")
