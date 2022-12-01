@@ -10,4 +10,5 @@ class SchoolApplicationTests {
 	void contextLoads() {
 	}
 
+
 }
